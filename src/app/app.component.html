@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Mi Sitio</a>
+        <a class="navbar-brand" routerLink="home">Comics Polígono Sur</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,25 +8,27 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio</a>
+                    <a class="nav-link" routerLink="home">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cómics</a>
+                    <a class="nav-link" routerLink="comics">Cómics</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Noticias</a>
+                    <a class="nav-link" routerLink="favoritos">Favoritos</a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Novedades</a>
+                    <a class="nav-link" routerLink="contacto">Contacto</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
-            <a class="btn btn-primary ms-3" href="#">Login</a>
+            
+            @if (!isAuthenticated) {
+                <a class="btn btn-primary ms-3" routerLink="login">Login</a>
+            }
+            @if (isAuthenticated) {
+                <button class="btn btn-danger ms-3" (click)="logout()">Logout</button>
+            }
         </div>
     </nav>
 </header>
-<app-home></app-home>
-<router-outlet />
+<router-outlet></router-outlet>

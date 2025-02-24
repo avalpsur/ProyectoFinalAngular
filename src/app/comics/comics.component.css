@@ -1,0 +1,18 @@
+.card {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-img-top {
+    height: 350px;
+    object-fit: cover;
+  }
+  
+  .card-text {
+    font-size: 14px;
+    color: #555;
+  }
+  

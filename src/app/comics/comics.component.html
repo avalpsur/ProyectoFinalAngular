@@ -1,1 +1,42 @@
-<p>comics works!</p>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">🔍 Buscar Cómics</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form class="input-group" (submit)="buscarComics($event)">
+        <input #filtrar type="text" class="form-control" placeholder="Buscar cómic..."
+               (input)="filtrarComics($event)">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+
+  @if (comics.length === 0) {
+    <div class="alert alert-warning text-center mt-4">
+      <strong>No se encontraron cómics.</strong>
+    </div>
+  }
+
+  <div class="row mt-4">
+    @for (comic of comics; track comic.id) {
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+          @if (comic.image?.original_url) {
+            <img [src]="comic.image.original_url" class="card-img-top img-fluid" alt="{{ comic.name }}">
+          }
+          <div class="card-body">
+            <a [routerLink]="['/detalle', comic.id]">
+              <h5 class="card-title text-primary fw-bold">{{ comic.name || 'Sin título' }}</h5>
+            </a>
+            <p class="card-text"><strong>🏢 Editorial:</strong> {{ comic.publisher?.name || 'No disponible' }}</p>
+
+            <button class="btn btn-success w-100 mt-2" (click)="addFavorito(comic.id)">
+              Añadir a Favoritos
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+</div>

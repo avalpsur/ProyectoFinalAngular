@@ -1,0 +1,55 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📧 Contáctanos</h2>
+  
+    <form [formGroup]="contactForm" (ngSubmit)="enviarCorreo()">
+      <div class="mb-3">
+        <label for="from_name" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="from_name" formControlName="from_name" />
+        @if (contactForm.get('from_name')?.touched && contactForm.get('from_name')?.invalid) {
+          <div class="text-danger">
+            <p>El nombre es obligatorio y debe tener al menos 3 caracteres</p>
+          </div>
+        }
+      </div>
+  
+      <div class="mb-3">
+        <label for="reply_to" class="form-label">Correo Electrónico:</label>
+        <input type="email" class="form-control" id="reply_to" formControlName="reply_to" />
+        @if (contactForm.get('reply_to')?.touched && contactForm.get('reply_to')?.invalid) {
+          <div class="text-danger">
+            @if (contactForm.get('reply_to')?.hasError('required')) {
+              <p>El correo es obligatorio</p>
+            }
+            @if (contactForm.get('reply_to')?.hasError('email')) {
+              <p>El correo no es válido</p>
+            }
+          </div>
+        }
+      </div>
+  
+      <div class="mb-3">
+        <label for="mensaje" class="form-label">Mensaje:</label>
+        <textarea class="form-control" id="mensaje" formControlName="mensaje"></textarea>
+        @if (contactForm.get('mensaje')?.touched && contactForm.get('mensaje')?.invalid) {
+          <div class="text-danger">
+            <p>El mensaje es obligatorio y debe tener al menos 10 caracteres</p>
+          </div>
+        }
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Enviar</button>
+    </form>
+  
+    @if (correoEnviado) {
+      <div class="alert alert-success mt-3" role="alert">
+        ✅ ¡Tu mensaje ha sido enviado con éxito!
+      </div>
+    }
+  
+    @if (errorEnvio) {
+      <div class="alert alert-danger mt-3" role="alert">
+        ❌ Hubo un problema al enviar el mensaje. Inténtalo de nuevo más tarde.
+      </div>
+    }
+  </div>
+  

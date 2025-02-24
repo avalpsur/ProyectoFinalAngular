@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    @if (comicDetails) {
+      <div class="row">
+        <div class="col-md-4">
+          <img [src]="comicDetails.image.original_url" class="img-fluid rounded" alt="{{ comicDetails.name }}">
+        </div>
+        <div class="col-md-8">
+          <h1 class="display-4">{{ comicDetails.name }}</h1>
+          <h4 class="text-muted">#{{ comicDetails.issue_number }}</h4>
+          <p class="mt-3" [innerHTML]="comicDetails.description"></p>
+  
+          <ul class="list-group mt-4">
+           
+            <li class="list-group-item">
+              <strong>Editorial:</strong> {{ comicDetails.publisher?.name || 'No disponible' }}
+            </li>
+            <li class="list-group-item">
+              <strong>Personajes:</strong>
+              <ul class="list-unstyled">
+                @for (character of comicDetails.character_credits; track character.idx) {
+                    <li>{{ character.name }}</li>
+                  }
+                  
+              </ul>
+            </li>
+          </ul>
+  
+          <a routerLink="/comics" class="btn btn-primary mt-4">Volver a la lista de cómics</a>
+        </div>
+      </div>
+    } @else {
+      <div class="text-center my-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p>Cargando detalles del cómic...</p>
+      </div>
+    }
+  </div>
+  
